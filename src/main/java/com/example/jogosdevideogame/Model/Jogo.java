@@ -32,11 +32,11 @@ public class Jogo {
     @NotBlank(message = Mensagem.ERRO_SINOPSE)
     String sinopse;
     String ImageUri;
-    //@Size(min = 2, max = 3, message = Mensagem.ERRO_CLASSIFICACAO)
-    @Max(value = 21, message = Mensagem.ERRO_CLASSIFICACAO)
-    @Min(value = 10, message = Mensagem.ERRO_CLASSIFICACAO)
+    @Size(min = 2, max = 100, message = Mensagem.ERRO_CLASSIFICACAO)
+    //@Max(value = 21, message = Mensagem.ERRO_CLASSIFICACAO)
+    //@Min(value = 10, message = Mensagem.ERRO_CLASSIFICACAO)
     //@NotEmpty(message = Mensagem.ERRO_CLASSIFICACAO)
-    Integer classificacao;
+    String classificacao;
     //@NotEmpty(message = Mensagem.ERRO_VALOR)
     @PositiveOrZero(message = Mensagem.ERRO_VALOR)
     Integer valor;
