@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<header th:fragment="header" class="bg-dark py-5">
+  <div class="container px-4 px-lg-5 my-5">
+    <div class="text-center text-white">
+      <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div th:each="jogo : ${listaJogos}" class="carousel-item active">
+            <img th:src="@{'/images/' + ${jogo.ImageUri}}" class="d-block w-100" alt="...">
+            <div th:text="${jogo.titulo}"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</header>
+
+<footer th:fragment="footer" class="py-5 bg-dark">
+  <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2021</p></div>
+</footer>
+
+<head th:fragment="head12">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <title>Shop Homepage - Start Bootstrap Template</title>
+  <!-- Favicon-->
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+  <!-- Bootstrap icons-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+  <!-- Core theme CSS (includes Bootstrap)-->
+  <link th:href="@{/style.css}" rel="stylesheet" type="text/css"/>
+
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+
+
+<nav th:fragment="nav" class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container px-4 px-lg-5">
+    <a class="navbar-brand" th:href="@{'/index/'}">GAME OVER</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+        <li class="nav-item"><a class="nav-link active" aria-current="page" th:href="@{'/index/'}">Início</a></li>
+        <li class="nav-item"><a class="nav-link" th:href="@{'/sobre/'}">Sobre</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Loja</a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="#!">Todos os Produtos</a></li>
+            <li><hr class="dropdown-divider" /></li>
+            <li><a class="dropdown-item" href="#!">Console</a></li>
+            <li><a class="dropdown-item" href="#!">Computador</a></li>
+          </ul>
+        </li>
+      </ul>
+
+        <a class="btn btn-outline-dark" href="/carrinho">
+          <i class="bi-cart-fill me-1"></i>
+          Carrinho
+          <div th:if="${!session.isEmpty()}">
+            <span class="badge bg-dark text-white ms-1 rounded-pill" th:text="${session.carrinho.size()}"></span>
+          </div>
+
+        </a>
+
+    </div>
+  </div>
+</nav>
+<!--/*@thymesVar id="listaJogos" type=""*/-->
+<div th:fragment="produtos" class="col mb-5" th:each="jogo : ${session.carrinho}">
+  <div class="card h-100">
+    <!-- Product image-->
+    <img class="card-img-top" style="height: 200px;" th:src="@{'/images/' + ${jogo.ImageUri}}" alt="imagem" />
+    <!-- Product details-->
+    <div class="card-body p-4">
+      <div class="text-center">
+        <!-- Product name-->
+        <!--/*@thymesVar id="titulo" type=""*/-->
+        <h5 class="fw-bolder" th:text="${jogo.titulo}">Titulo</h5>
+        <!-- Product price-->
+        <!--/*@thymesVar id="valor" type=""*/-->
+        <div th:text="${jogo.valor}">Valor</div>
+
+        <a th:href="@{'/deletar/' + ${jogo.id}}">Deletar</a>
+        <a th:href="@{'/editar/' + ${jogo.id}}">Editar</a>
+      </div>
+    </div>
+    <!-- Product actions-->
+    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+      <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View options</a></div>
+    </div>
+  </div>
+</div>
+
+<div th:fragment="produtosCliente" class="col mb-5" th:each="jogo : ${listaJogos}">
+        <div class="card h-100">
+          <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+          <!-- Product image-->
+          <img class="card-img-top" style="height: 200px;" th:src="@{'/images/' + ${jogo.ImageUri}}" alt="imagem" />
+          <!-- Product details-->
+          <div class="card-body p-4">
+            <div class="text-center">
+        <!-- Product name-->
+        <!--/*@thymesVar id="titulo" type=""*/-->
+        <h5 class="fw-bolder" th:text="${jogo.titulo}">Titulo</h5>
+              <div class="d-flex justify-content-center small text-warning mb-2">
+                <div class="bi-star-fill"></div>
+                <div class="bi-star-fill"></div>
+                <div class="bi-star-fill"></div>
+                <div class="bi-star-fill"></div>
+                <div class="bi-star-fill"></div>
+              </div>
+        <!-- Product price-->
+        <!--/*@thymesVar id="valor" type=""*/-->
+        <div th:text="${jogo.valor}">Valor</div>
+      </div>
+    </div>
+          <div class="text-center" th:text="${jogo.sinopse}"></div>
+    <!-- Product actions-->
+    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+      <div class="text-center"><a class="btn btn-outline-dark mt-auto" th:href="@{'/AdicionarCarrinho/' + ${jogo.id}}">Comprar</a></div>
+    </div>
+  </div>
+</div>
+
+<div th:fragment="produtoCar" class="container mb-4">
+  <div class="row">
+    <div class="col-12">
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th scope="col"> </th>
+            <th scope="col">Product</th>
+            <th scope="col">Available</th>
+            <th scope="col" class="text-center">Quantity</th>
+            <th scope="col" class="text-right">Price</th>
+            <th> </th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="jogo : ${session.carrinho}">
+            <td><img style="width: 50px; height: 50px" th:src="@{'/images/' + ${jogo.ImageUri}}" /> </td>
+            <td th:text="${jogo.titulo}">Product Name Dada</td>
+            <td>In stock</td>
+            <td><input class="form-control" type="text" value="1" /></td>
+            <td class="text-right" th:text="${jogo.valor}">124,90 €</td>
+            <td class="text-right"><a th:href="@{'/removerCarrinho/' + ${jogo.id}}" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> </a> </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="col mb-2">
+      <div class="row">
+        <div class="col-sm-12  col-md-6">
+          <a class="btn btn-block btn-light" th:href="@{'/index'}">Continue Shopping</a>
+        </div>
+        <div class="col-sm-12 col-md-6 text-right">
+          <a class="btn btn-lg btn-block btn-success text-uppercase" th:href="@{'/finalizarCompra'}">Checkout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<form th:fragment="forms" method="post" th:object="${jogo}" th:action="@{/salvar}" enctype="multipart/form-data">
+  <p th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}"></p>
+  <div class="form-group">
+    <label for="exampleFormControlInput1">Título</label>
+    <input type="text" name="titulo" class="form-control" id="exampleFormControlInput1" placeholder="God Of War" th:field="*{titulo}">
+  </div>
+  <p th:if="${#fields.hasErrors('genero')}" th:errors="*{genero}"></p>
+  <div class="form-group">
+    <label for="exampleFormControlInput2">Genero</label>
+    <input type="text" name="genero" class="form-control" id="exampleFormControlInput2" placeholder="Ação" th:field="*{genero}">
+  </div>
+  <p th:if="${#fields.hasErrors('faixa_etaria')}" th:errors="*{faixa_etaria}"></p>
+  <div class="form-group">
+    <label for="exampleFormControlInput3">Faixa Etária</label>
+    <input type="text" name="faixa_etaria" class="form-control" id="exampleFormControlInput3" placeholder="12+" th:field="*{faixa_etaria}">
+  </div>
+  <p th:if="${#fields.hasErrors('sinopse')}" th:errors="*{sinopse}"></p>
+  <div class="form-group">
+    <label for="exampleFormControlTextarea1">Sinopse</label>
+    <textarea type="text" name="sinopse" class="form-control" placeholder="Resumo do Item" id="exampleFormControlTextarea1" rows="3" th:field="*{sinopse}"></textarea>
+  </div>
+  <p th:if="${#fields.hasErrors('classificacao')}" th:errors="*{classificacao}"></p>
+  <div class="form-group">
+    <label for="exampleFormControlTextarea2">Classificação</label>
+    <textarea type="text" name="classificacao" class="form-control" placeholder="Avaliação Crítica" id="exampleFormControlTextarea2" rows="2" th:field="*{classificacao}"></textarea>
+  </div>
+  <p th:if="${#fields.hasErrors('valor')}" th:errors="*{valor}"></p>
+  <div class="form-group">
+    <label for="exampleFormControlInput6">Valor</label>
+    <input type="number" name="valor" class="form-control" id="exampleFormControlInput6" placeholder="Preço Unitário" th:field="*{valor}">
+  </div>
+  <p th:if="${#fields.hasErrors('lancamento')}" th:errors="*{lancamento}"></p>
+  <div class="form-group">
+    <label for="exampleFormControlInput7">Lançamento</label>
+    <input type="number" name="lancamento" class="form-control" id="exampleFormControlInput7" placeholder="Ano de Lançamento" th:field="*{lancamento}">
+  </div>
+  <p th:if="${#fields.hasErrors('ImageUri')}" th:errors="*{ImageUri}"></p>
+  <div class="form-group">
+    <label for="exampleFormControlFile1">Imagem</label>
+    <input type="file" name="file" class="form-control-file" id="exampleFormControlFile1">
+  </div>
+  <button type="submit" class="btn btn-primary">Enviar</button>
+</form>
+
+
+<div th:fragment="statusCadastro(status)">
+  <p th:switch="${status}">
+    <span th:case="'CADASTRADO'">CADATRADO</span>
+    <span th:case="1">ALTERADO</span>
+    <span th:case="'EXCLUIDO'">EXCLUIDO</span>
+    <span th:case="*">CANCELADO</span>
+  </p>
+</div>
+
+<div th:fragment="statusUsuario(status)">
+  <p>
+    <span th:if="${status == 'NOVO'}"> Bem vindo!</span>
+    <span th:unless="${status == 'NOVO'}"> Voltou!!</span>
+  </p>
+</div>
+
+<div th:fragment="displayName(name)">
+  <p th:text="${name} ?: 'ANONIMO'"></p>
+</div>
+
+<div th:fragment="navAdmin" class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container px-4 px-lg-5">
+    <a class="navbar-brand" href="#!">Start Template</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent1" aria-controls="navbarSupportedContent1" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent1">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+        <li class="nav-item"><a class="nav-link active" aria-current="page" href="/index">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="navbarDropdown1" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown1">
+            <li><a class="dropdown-item" href="#!">All Products</a></li>
+            <li><hr class="dropdown-divider" /></li>
+            <li><a class="dropdown-item" href="#!">Popular Items</a></li>
+            <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
+          </ul>
+        </li>
+      </ul>
+
+      <a class="btn btn-outline-dark" th:href="@{'/cadastro'}">
+        <i class="bi-cart-fill me-1"></i>
+        Novo Item
+        <span class="badge bg-dark text-white ms-1 rounded-pill" th:each="jogo : ${adicionarCarrinho}">${jogo}</span>
+      </a>
+    </div>
+  </div>
+</div>
+</html>

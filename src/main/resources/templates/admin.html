@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/commons :: head"></head>
+
+<body>
+<!-- Navigation-->
+<div th:replace="fragments/commons :: navAdmin"></div>
+<!-- Header-->
+<div th:replace="fragments/commons :: header"></div>
+<!-- Section-->
+<section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            <!--/*@thymesVar id="listaJogos" type=""*/-->
+            <div th:replace="fragments/commons :: produtos"></div>
+        </div>
+    </div>
+</section>
+<!-- Footer-->
+<div th:replace="fragments/commons :: footer"></div>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS-->
+<script src="js/scripts.js"></script>
+</body>
+</html>
