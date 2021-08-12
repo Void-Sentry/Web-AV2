@@ -106,7 +106,7 @@ public class JogoController {
         model.addAttribute("listaJogos", listaJogos);
         fileStorageService.loadAll();
 
-        return "teste";
+        return "index";
     }
 
     @RequestMapping("/cadastro")
