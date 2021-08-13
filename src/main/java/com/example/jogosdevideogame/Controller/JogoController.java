@@ -122,12 +122,13 @@ public class JogoController {
             return "cadastro";
         }
         else{
+
             Integer hashed = hashCode();
             jogo.setImageUri(hashed + file.getOriginalFilename());
-            service.save(jogo);
+            this.service.save(jogo);
             fileStorageService.save(file, hashed);
 
-            redirectAttributes.addAttribute("msg", "Cadastro realizado com sucesso!");
+            //redirectAttributes.addAttribute("msg", "Cadastro realizado com sucesso!");
             return "redirect:/admin";
         }
     }

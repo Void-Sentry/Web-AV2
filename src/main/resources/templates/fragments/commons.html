@@ -164,6 +164,7 @@
 </div>
 
 <form th:fragment="forms" method="post" th:object="${jogo}" th:action="@{/salvar}" enctype="multipart/form-data">
+  <input type="hidden" readonly name="id" th:field="*{id}"> <br />
   <p th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}"></p>
   <div class="form-group">
     <label for="exampleFormControlInput1">Título</label>
@@ -206,7 +207,6 @@
   </div>
   <button type="submit" class="btn btn-primary">Enviar</button>
 </form>
-
 
 <div th:fragment="statusCadastro(status)">
   <p th:switch="${status}">
