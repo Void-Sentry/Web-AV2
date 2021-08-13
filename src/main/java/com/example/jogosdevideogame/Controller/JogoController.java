@@ -140,12 +140,12 @@ public class JogoController {
     }
 
     @RequestMapping("/editar/{id}")
-    public String doEdit(@PathVariable(name = "id") Long id, Model model){
-        //ModelAndView modelAndView = new ModelAndView("edicao");
+    public ModelAndView doEdit(@PathVariable(name = "id") Long id){
+        ModelAndView modelAndView = new ModelAndView("edicao");
         Jogo jogo = service.findById(id);
-        model.addAttribute("jogo", jogo);
+        modelAndView.addObject("jogo", jogo);
 
-        return "edicao";
+        return modelAndView;
     }
 
     @RequestMapping("/finalizarCompra")
