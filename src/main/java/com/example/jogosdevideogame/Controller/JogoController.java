@@ -154,8 +154,4 @@ public class JogoController {
         return "redirect:/index";
     }
 
-    @RequestMapping("/erro")
-    public String getErro(){    
-        return "index";
-    }
 }

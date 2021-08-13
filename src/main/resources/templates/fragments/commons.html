@@ -66,7 +66,7 @@
   </div>
 </nav>
 <!--/*@thymesVar id="listaJogos" type=""*/-->
-<div th:fragment="produtos" class="col mb-5" th:each="jogo : ${session.carrinho}">
+<div th:fragment="produtos" class="col mb-5" th:each="jogo : ${listaJogos}">
   <div class="card h-100">
     <!-- Product image-->
     <img class="card-img-top" style="height: 200px;" th:src="@{'/images/' + ${jogo.ImageUri}}" alt="imagem" />
