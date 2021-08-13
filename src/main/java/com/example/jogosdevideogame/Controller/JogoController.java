@@ -153,4 +153,9 @@ public class JogoController {
         request.getSession().invalidate();
         return "redirect:/index";
     }
+
+    @RequestMapping("/erro")
+    public String getErro(){    
+        return "index";
+    }
 }
